@@ -2,7 +2,7 @@
 {
 	"NoChance"
 	{
-		"en"	"If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug"
-		"es"	"Si tu quieres plugins de este servidor entonces pongase en contacto con Franc1sco steam: franug -> http://steamcommunity.com/id/franug"
+		"en"	"If you want plugins of this server, then contact with Franc1sco steam: franug"
+		"es"	"Si tu quieres plugins de este servidor entonces pongase en contacto con Franc1sco steam: franug"
 	}
 }

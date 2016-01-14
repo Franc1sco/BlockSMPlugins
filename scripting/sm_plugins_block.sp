@@ -131,11 +131,11 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 			char msg[128], msg2[128];
 			
 			Format(msg, 128, "%T", "NoChance", client);
-			Format(msg2, 128, "[Franug Plugin list blocker] %s\n",msg);
+			Format(msg2, 128, "[Franug Plugin list blocker] %s \n",msg);
 			
 			DHookSetParamString(hParams, 2, msg2);
 			
-			Format(msg2, 128, " \x04[Franug Plugin list blocker]\x01 %s\n",msg);
+			Format(msg2, 128, " \x04[Franug Plugin list blocker]\x01 %s \n",msg);
 			
 			PrintToChat(client, msg2);
 			
