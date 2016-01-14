@@ -93,6 +93,8 @@ stock void StartPlugin()
 
 public MRESReturn Hook_ClientPrintf(Handle hParams)
 {
+	int client = DHookGetParam(hParams, 1);
+	
 	char buffer[1024];
 	DHookGetParamString(hParams, 2, buffer, 1024);
 	if(buffer[1] == '"' && (StrContains(buffer, "\" (") != -1 || (StrContains(buffer, ".smx\" ") != -1))) 
@@ -112,7 +114,8 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 	{
 		if (StrContains(buffer, Triggers2[i], false) != -1)
 		{
-			DHookSetParamString(hParams, 2, "If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
+			DHookSetParamString(hParams, 2, "[Franug Plugin list blocker] If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
+			PrintToChat(client, " \x04[Franug Plugin list blocker] \x01If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
 			return MRES_ChangedHandled;
 		}
 	}
