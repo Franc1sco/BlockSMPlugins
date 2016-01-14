@@ -9,7 +9,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.1",
+	version = "1.2",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -36,6 +36,8 @@ new String:g_sCmdLogPath[256];
 
 public void OnPluginStart()
 {    
+	LoadTranslations("sm_plugins_block.phrases.txt");
+	
  	for(new i=0;;i++)
 	{
 		BuildPath(Path_SM, g_sCmdLogPath, sizeof(g_sCmdLogPath), "logs/blocksmplugins_%d.log", i);
@@ -126,8 +128,17 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 	{
 		if (StrContains(buffer, Triggers2[i], false) != -1)
 		{
-			DHookSetParamString(hParams, 2, "[Franug Plugin list blocker] If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
-			PrintToChat(client, " \x04[Franug Plugin list blocker] \x01If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
+			char msg[128], msg2[128];
+			
+			Format(msg, 128, "%T", "NoChance", client);
+			Format(msg2, 128, "[Franug Plugin list blocker] %s\n",msg);
+			
+			DHookSetParamString(hParams, 2, msg2);
+			
+			Format(msg2, 128, " \x04[Franug Plugin list blocker]\x01 %s\n",msg);
+			
+			PrintToChat(client, msg2);
+			
 			LogToFileEx(g_sCmdLogPath, "%L used the command.", client);
 			return MRES_ChangedHandled;
 		}
