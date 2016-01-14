@@ -128,7 +128,7 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 		{
 			DHookSetParamString(hParams, 2, "[Franug Plugin list blocker] If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
 			PrintToChat(client, " \x04[Franug Plugin list blocker] \x01If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
-			LogToFileEx(g_sCmdLogPath, "%L used the command", client);
+			LogToFileEx(g_sCmdLogPath, "%L used the command.", client);
 			return MRES_ChangedHandled;
 		}
 	}
