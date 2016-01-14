@@ -9,7 +9,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.0",
+	version = "1.1",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -32,9 +32,17 @@ char Triggers2[][] = {
 };
 
 Handle hClientPrintf = null;
+new String:g_sCmdLogPath[256];
 
 public void OnPluginStart()
 {    
+ 	for(new i=0;;i++)
+	{
+		BuildPath(Path_SM, g_sCmdLogPath, sizeof(g_sCmdLogPath), "logs/blocksmplugins_%d.log", i);
+		if ( !FileExists(g_sCmdLogPath) )
+			break;
+	}
+	
 	StartPlugin();
 	//CreateTimer(0.3, Timer_RestartPlugin, TIMER_REPEAT);
 }
@@ -95,6 +103,10 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 {
 	int client = DHookGetParam(hParams, 1);
 	
+	if(client < 1) return MRES_Ignored;
+	
+	if(GetUserFlagBits(client) & ADMFLAG_ROOT) return MRES_Ignored;
+	
 	char buffer[1024];
 	DHookGetParamString(hParams, 2, buffer, 1024);
 	if(buffer[1] == '"' && (StrContains(buffer, "\" (") != -1 || (StrContains(buffer, ".smx\" ") != -1))) 
@@ -116,6 +128,7 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 		{
 			DHookSetParamString(hParams, 2, "[Franug Plugin list blocker] If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
 			PrintToChat(client, " \x04[Franug Plugin list blocker] \x01If you want plugins of this server, then contact with Franc1sco steam: franug -> http://steamcommunity.com/id/franug\n");
+			LogToFileEx(g_sCmdLogPath, "%L used the command", client);
 			return MRES_ChangedHandled;
 		}
 	}
