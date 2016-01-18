@@ -9,7 +9,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.3",
+	version = "1.3.1",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -46,7 +46,7 @@ public void OnPluginStart()
 	}
 	
 	StartPlugin();
-	CreateTimer(1.5, Timer_RestartPlugin, TIMER_REPEAT);
+	CreateTimer(5.0, Timer_RestartPlugin, _, TIMER_REPEAT);
 }
 
 public Action Timer_RestartPlugin(Handle timer)
