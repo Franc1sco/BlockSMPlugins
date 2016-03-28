@@ -105,7 +105,7 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 {
 	int client = DHookGetParam(hParams, 1);
 	
-	if(client < 1) return MRES_Ignored;
+	if(client < 1 || !IsClientInGame(client)) return MRES_Ignored;
 	
 	if(GetUserFlagBits(client) & ADMFLAG_ROOT) return MRES_Ignored;
 	
