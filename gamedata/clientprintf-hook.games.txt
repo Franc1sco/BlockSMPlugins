@@ -56,4 +56,15 @@
 			}
 		}
 	}
+	"tf"
+	{
+		"Offsets"
+		{
+			"ClientPrintf"
+			{
+				"windows"	"24"
+				"linux"		"24"
+			}
+		}
+	}
 }
