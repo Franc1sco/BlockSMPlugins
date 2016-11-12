@@ -58,6 +58,10 @@
 	}
 	"tf"
 	{
+		"Keys"
+		{
+			"EngineInterface"	"VEngineServer023"
+		}
 		"Offsets"
 		{
 			"ClientPrintf"
