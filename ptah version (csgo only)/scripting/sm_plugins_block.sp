@@ -10,7 +10,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.3.1 (CSGO version)",
+	version = "1.3.2 (CSGO version)",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -23,6 +23,9 @@ new String:g_sCmdLogPath[256];
 public void OnPluginStart()
 {    
 	LoadTranslations("sm_plugins_block.phrases.txt");
+	
+	PTaH(PTaH_ConsolePrint, Hook, ConsolePrint);
+	PTaH(PTaH_ExecuteStringCommand, Hook, ExecuteStringCommand);
 	
  	for(new i=0;;i++)
 	{
