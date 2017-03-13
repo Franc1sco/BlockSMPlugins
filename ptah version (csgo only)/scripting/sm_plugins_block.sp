@@ -10,7 +10,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.3.2 (CSGO version)",
+	version = "1.4 (CSGO version)",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -37,60 +37,62 @@ public void OnPluginStart()
 
 public Action ConsolePrint(int client, char message[512])
 {
-	if (IsClientValid(client))
-	{
-		if (GetUserFlagBits(client) & ADMFLAG_ROOT)
-			return Plugin_Continue;
+	if(client == 0) return Plugin_Continue;
+	
+	if (IsClientValid(client) && GetUserFlagBits(client) & ADMFLAG_ROOT)
+		return Plugin_Continue;
 		
-		if(message[1] == '"' && (StrContains(message, "\" (") != -1 || (StrContains(message, ".smx\" ") != -1)))
-			return Plugin_Handled;
-		else if(StrContains(message, "To see more, type \"sm plugins", false) != -1 || StrContains(message, "To see more, type \"sm exts", false) != -1)
+	if(message[1] == '"' && (StrContains(message, "\" (") != -1 || (StrContains(message, ".smx\" ") != -1)))
+		return Plugin_Handled;
+	else if(StrContains(message, "To see more, type \"sm plugins", false) != -1 || StrContains(message, "To see more, type \"sm exts", false) != -1)
+	{
+		if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
 		{
-				if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
-				{
-					PrintMSG(client, "sm plugins");
-				}
-				return Plugin_Handled;
+			PrintMSG(client, "sm plugins");
 		}
+		return Plugin_Handled;
 	}
-	return Plugin_Continue;
+	
+	return Plugin_Handled;
+	
 }
 
 public Action ExecuteStringCommand(int client, char message[512]) 
 {
-	if (IsClientValid(client))
+	if(client == 0) return Plugin_Continue;
+	
+	static char sMessage[512];
+	sMessage = message;
+	TrimString(sMessage);
+		
+	if (IsClientValid(client) && GetUserFlagBits(client) & ADMFLAG_ROOT)
+			return Plugin_Continue;
+		
+	if(StrContains(sMessage, "sm ") != -1 || StrEqual(sMessage, "sm", false))
 	{
-		static char sMessage[512];
-		sMessage = message;
-		TrimString(sMessage);
-		
-		if (GetUserFlagBits(client) & ADMFLAG_ROOT)
-				return Plugin_Continue;
-		
-		if(StrContains(sMessage, "sm ") != -1 || StrEqual(sMessage, "sm", false))
+		if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
 		{
-			if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
-			{
-				PrintMSG(client, "sm");
-			}
-			return Plugin_Handled;
+			PrintMSG(client, "sm");
 		}
+		return Plugin_Handled;
+	}
 		
-		if(StrContains(sMessage, "meta ") != -1 || StrEqual(sMessage, "meta", false))
+	if(StrContains(sMessage, "meta ") != -1 || StrEqual(sMessage, "meta", false))
+	{
+		if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
 		{
-			if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
-			{
-				PrintMSG(client, "meta");
-			}
-			return Plugin_Handled;
+			PrintMSG(client, "meta");
 		}
+		return Plugin_Handled;
 	}
 	
-	return Plugin_Continue; 
+	return Plugin_Continue;
 }
 
 PrintMSG(client, const char[] command)
 {
+	if (!IsClientValid(client))return;
+	
 	char msg[128], msg2[128];
 			
 	Format(msg, 128, "%T", "NoChance", client);
