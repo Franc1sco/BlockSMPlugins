@@ -18,7 +18,6 @@
 #pragma semicolon 1
 
 #include <sourcemod>
-#include <dhooks>
 #include <sdktools>
 #include <PTaH>
 
@@ -27,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.4 (CSGO version)",
+	version = "1.4.1 (CSGO version)",
 	url = "http://steamcommunity.com/id/franug"
 };
 
