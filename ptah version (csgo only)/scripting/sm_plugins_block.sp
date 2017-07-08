@@ -26,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.4.1 (CSGO version)",
+	version = "1.4.2 (CSGO version)",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -84,7 +84,7 @@ public Action ExecuteStringCommand(int client, char message[512])
 	if (IsClientValid(client) && GetUserFlagBits(client) & ADMFLAG_ROOT)
 			return Plugin_Continue;
 		
-	if(StrContains(sMessage, "sm ") != -1 || StrEqual(sMessage, "sm", false))
+	if(StrContains(sMessage, "sm ") == 0 || StrEqual(sMessage, "sm", false))
 	{
 		if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
 		{
@@ -93,7 +93,7 @@ public Action ExecuteStringCommand(int client, char message[512])
 		return Plugin_Handled;
 	}
 		
-	if(StrContains(sMessage, "meta ") != -1 || StrEqual(sMessage, "meta", false))
+	if(StrContains(sMessage, "meta ") == 0 || StrEqual(sMessage, "meta", false))
 	{
 		if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
 		{
