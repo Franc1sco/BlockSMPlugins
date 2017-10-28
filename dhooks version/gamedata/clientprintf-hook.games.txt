@@ -29,7 +29,7 @@
 	{
 		"Keys"
 		{
-			"EngineInterface"	"VEngineServer023"
+			"EngineInterface"	"VEngineServer022"
 		}
 		"Offsets"
 		{
@@ -41,33 +41,18 @@
 		}
 	}
 	
-	"csgo"
-	{
-		"Keys"
-		{
-			"EngineInterface"	"VEngineServer023"
-		}
-		"Offsets"
-		{
-			"ClientPrintf"
-			{
-				"windows"	"46"
-				"linux"		"46"
-			}
-		}
-	}
 	"tf"
 	{
 		"Keys"
 		{
-			"EngineInterface"	"VEngineServer021"
+			"EngineInterface"	"VEngineServer022"
 		}
 		"Offsets"
 		{
 			"ClientPrintf"
 			{
-				"windows"	"24"
-				"linux"		"24"
+				"windows"	"45"
+				"linux"		"45"
 			}
 		}
 	}
