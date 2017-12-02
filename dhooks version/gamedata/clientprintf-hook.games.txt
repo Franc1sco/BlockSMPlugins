@@ -56,4 +56,19 @@
 			}
 		}
 	}
+	"csgo"
+	{
+		"Keys"
+		{
+			"EngineInterface1"	"VEngineServer023"
+		}
+		"Offsets"
+		{
+			"ClientPrintf"
+			{
+				"windows"	"46"
+				"linux"		"46"
+			}
+		}
+	}
 }
