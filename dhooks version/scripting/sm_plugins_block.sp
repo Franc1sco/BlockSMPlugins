@@ -26,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.3.1",
+	version = "1.5",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -51,9 +51,13 @@ char Triggers2[][] = {
 Handle hClientPrintf = null;
 new String:g_sCmdLogPath[256];
 
+ConVar cv_ban;
+
 public void OnPluginStart()
 {    
 	LoadTranslations("sm_plugins_block.phrases.txt");
+	
+	cv_ban = CreateConVar("sm_plugins_block_ban", "-1", "Ban player? -1 = no ban, 0 = permanent, other value is ban time");
 	
  	for(new i=0;;i++)
 	{
@@ -157,6 +161,11 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 			PrintToChat(client, msg2);
 			
 			LogToFileEx(g_sCmdLogPath, "%L used the command.", client);
+			
+			int ban = GetConVarInt(cv_ban);
+			if(ban > -1)
+				ServerCommand("sm_ban #%d %i blocksm", GetClientUserId(client), ban);
+		
 			return MRES_ChangedHandled;
 		}
 	}

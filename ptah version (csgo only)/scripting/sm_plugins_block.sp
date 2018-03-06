@@ -26,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.4.2 (CSGO version)",
+	version = "1.5 (CSGO version)",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -36,9 +36,13 @@ int g_iTime[MAXPLAYERS + 1] =  { -1, ... };
 
 new String:g_sCmdLogPath[256];
 
+ConVar cv_ban;
+
 public void OnPluginStart()
 {    
 	LoadTranslations("sm_plugins_block.phrases.txt");
+	
+	cv_ban = CreateConVar("sm_plugins_block_ban", "-1", "Ban player? -1 = no ban, 0 = permanent, other value is ban time");
 	
 	PTaH(PTaH_ConsolePrint, Hook, ConsolePrint);
 	PTaH(PTaH_ExecuteStringCommand, Hook, ExecuteStringCommand);
@@ -121,6 +125,10 @@ PrintMSG(client, const char[] command)
 	PrintToChat(client, msg2);
 			
 	LogToFile(g_sCmdLogPath, "\"%L\" tried access to \"%s\"", client, command);
+	
+	int ban = GetConVarInt(cv_ban);
+	if(ban > -1)
+		ServerCommand("sm_ban #%d %i blocksm", GetClientUserId(client), ban);
 }
 
 bool IsClientValid(int client)
