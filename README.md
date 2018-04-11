@@ -15,6 +15,6 @@ sm_plugins_block_ban "-1" // Ban player? -1 = no ban, 0 = permanent, other value
 
 ## Requeriments:
 
-Dhooks version (NEED FIX YET, USE PTAH VERSION FOR NOW) -> https://forums.alliedmods.net/showthread.php?t=180114
+Dhooks version -> https://forums.alliedmods.net/showthread.php?t=180114
 
 ptah version (csgo only) -> https://forums.alliedmods.net/showthread.php?p=2463410
