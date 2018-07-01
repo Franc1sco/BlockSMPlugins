@@ -25,22 +25,6 @@
 		}
 	}
 	
-	"cstrike"
-	{
-		"Keys"
-		{
-			"EngineInterface"	"VEngineServer022"
-		}
-		"Offsets"
-		{
-			"ClientPrintf"
-			{
-				"windows"	"45"
-				"linux"		"45"
-			}
-		}
-	}
-	
 	"tf"
 	{
 		"Keys"
