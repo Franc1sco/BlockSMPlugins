@@ -4,7 +4,7 @@
 	{
 		"Keys"
 		{
-			"EngineInterface"	"VEngineServer021"
+			"EngineInterface"	"VEngineServer023"
 		}
 		"Signatures"
 		{
@@ -24,22 +24,7 @@
 			}
 		}
 	}
-	
-	"tf"
-	{
-		"Keys"
-		{
-			"EngineInterface"	"VEngineServer022"
-		}
-		"Offsets"
-		{
-			"ClientPrintf"
-			{
-				"windows"	"45"
-				"linux"		"45"
-			}
-		}
-	}
+
 	"csgo"
 	{
 		"Keys"
