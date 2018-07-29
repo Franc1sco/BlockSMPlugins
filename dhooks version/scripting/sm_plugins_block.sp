@@ -26,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.5",
+	version = "1.6",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -66,8 +66,7 @@ public void OnPluginStart()
 			break;
 	}
 	
-	StartPlugin();
-	CreateTimer(5.0, Timer_RestartPlugin, _, TIMER_REPEAT);
+	CreateTimer(5.0, Timer_RestartPlugin);
 }
 
 public Action Timer_RestartPlugin(Handle timer)
@@ -115,7 +114,7 @@ stock void StartPlugin()
 	
 	if(!addr)
 		SetFailState("Failed to get engine ptr");
-	
+
 	hClientPrintf = DHookCreate(offset, HookType_Raw, ReturnType_Void, ThisPointer_Ignore, Hook_ClientPrintf);
 	DHookAddParam(hClientPrintf, HookParamType_Edict);
 	DHookAddParam(hClientPrintf, HookParamType_CharPtr);
