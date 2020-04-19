@@ -26,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.6 (CSGO version)",
+	version = "2.0 (CSGO version)",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -66,7 +66,7 @@ public Action ConsolePrint(int client, char message[512])
 		return Plugin_Handled;
 	else if(StrContains(message, "To see more, type \"sm plugins", false) != -1 || StrContains(message, "To see more, type \"sm exts", false) != -1)
 	{
-		if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
+		if(g_iTime[client] == 0 || GetTime() - g_iTime[client] > INTERVAL)
 		{
 			PrintMSG(client, "sm plugins");
 		}
@@ -90,7 +90,7 @@ public Action ExecuteStringCommand(int client, char message[512])
 		
 	if(StrContains(sMessage, "sm ") == 0 || StrEqual(sMessage, "sm", false))
 	{
-		if(g_iTime[client] == -1 || GetTime() - g_iTime[client] > INTERVAL)
+		if(g_iTime[client] == 0 || GetTime() - g_iTime[client] > INTERVAL)
 		{
 			PrintMSG(client, "sm");
 		}
@@ -111,7 +111,7 @@ public Action ExecuteStringCommand(int client, char message[512])
 
 PrintMSG(client, const char[] command)
 {
-	if (!IsClientValid(client))return;
+	g_iTime[client] = GetTime();
 	
 	char msg[128], msg2[128];
 			
@@ -122,13 +122,19 @@ PrintMSG(client, const char[] command)
 			
 	Format(msg2, 128, " \x04[Franug Plugin list blocker]\x01 %s \n",msg);
 			
-	PrintToChat(client, msg2);
+	if (IsClientValid(client))
+		PrintToChat(client, msg2);
 			
 	LogToFile(g_sCmdLogPath, "\"%L\" tried access to \"%s\"", client, command);
 	
 	int ban = GetConVarInt(cv_ban);
 	if(ban > -1)
 		ServerCommand("sm_ban #%d %i blocksm", GetClientUserId(client), ban);
+}
+
+public void OnClientDisconnect(int client)
+{
+	g_iTime[client] = 0;
 }
 
 bool IsClientValid(int client)

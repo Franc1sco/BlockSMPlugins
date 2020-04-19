@@ -26,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.6",
+	version = "2.0",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -125,9 +125,9 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 {
 	int client = DHookGetParam(hParams, 1);
 	
-	if(client < 1 || !IsClientInGame(client)) return MRES_Ignored;
+	if(client == 0) return MRES_Ignored;
 	
-	if(GetUserFlagBits(client) & ADMFLAG_ROOT) return MRES_Ignored;
+	if(IsClientInGame(client) && GetUserFlagBits(client) & ADMFLAG_ROOT) return MRES_Ignored;
 	
 	char buffer[1024];
 	DHookGetParamString(hParams, 2, buffer, 1024);
@@ -157,7 +157,8 @@ public MRESReturn Hook_ClientPrintf(Handle hParams)
 			
 			Format(msg2, 128, " \x04[Franug Plugin list blocker]\x01 %s \n",msg);
 			
-			PrintToChat(client, msg2);
+			if(IsClientInGame(client))
+				PrintToChat(client, msg2);
 			
 			LogToFileEx(g_sCmdLogPath, "%L used the command.", client);
 			
