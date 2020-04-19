@@ -26,7 +26,7 @@ public Plugin:myinfo =
 	name = "SM Franug Plugin list blocker",
 	author = "Franc1sco steam: franug",
 	description = "",
-	version = "1.5 (CSGO version)",
+	version = "1.6 (CSGO version)",
 	url = "http://steamcommunity.com/id/franug"
 };
 
@@ -44,8 +44,8 @@ public void OnPluginStart()
 	
 	cv_ban = CreateConVar("sm_plugins_block_ban", "-1", "Ban player? -1 = no ban, 0 = permanent, other value is ban time");
 	
-	PTaH(PTaH_ConsolePrint, Hook, ConsolePrint);
-	PTaH(PTaH_ExecuteStringCommand, Hook, ExecuteStringCommand);
+	PTaH(PTaH_ConsolePrintPre, Hook, ConsolePrint);
+	PTaH(PTaH_ExecuteStringCommandPre, Hook, ExecuteStringCommand);
 	
  	for(new i=0;;i++)
 	{
